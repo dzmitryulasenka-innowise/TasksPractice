@@ -1,7 +1,7 @@
 {
-  "name": "dmitry/moreless",
+  "name": "dmitry/TasksPractice",
   "version": "2.7.7",
-  "description": "MoreLess",
+  "description": "TasksPractice",
   "autoload": {
     "psr-4": {
       "App\\": "App/"
