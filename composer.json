@@ -1,0 +1,13 @@
+{
+  "name": "dmitry/moreless",
+  "version": "2.7.7",
+  "description": "MoreLess",
+  "autoload": {
+    "psr-4": {
+      "App\\": "App/"
+    }
+  },
+  "require": {
+
+  }
+}
