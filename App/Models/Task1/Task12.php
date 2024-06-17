@@ -6,11 +6,8 @@ use App\Interfaces\Task1\Task1Interface;
 
 class Task12 implements Task1Interface
 {
-
-
     public function main(int $inputNumber): string
     {
-        $answer = '';
         switch ($inputNumber) {
             case ($inputNumber > 30):
                 $answer = 'More than 30';
@@ -24,6 +21,7 @@ class Task12 implements Task1Interface
             default:
                 $answer = 'Equal or less than 10';
         }
+
         return $answer;
     }
 }

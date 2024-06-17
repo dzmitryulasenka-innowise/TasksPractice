@@ -6,7 +6,6 @@ use App\Interfaces\Task1\Task1Interface;
 
 class Task11 implements Task1Interface
 {
-
     public function main(int $inputNumber): string
     {
         $answer = '';
