@@ -7,10 +7,6 @@ require_once __DIR__ . '/vendor/autoload.php';
 use App\Models\CounterDays;
 
 
-$bithday = '19-06-2024';
-
-
-
-
+$birthday = '19-06-2024';
 $task = new CounterDays();
-print_r($task->main($bithday));
+var_dump($task->main($birthday));

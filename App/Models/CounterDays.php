@@ -6,42 +6,19 @@ namespace App\Models;
 
 class CounterDays
 {
-    private int $secondsInDay = 86400;
-    private string $day;
-    private string $month;
-    private string $year;
-
+    const SECOND_PER_DAY = 86400;
     public function main (string $birthday): int
     {
-        $date = strtotime($birthday);
-        $this->day = date('d', $date);
-        $this->month = date('m', $date);
-        $this->year = date('y', $date);
+        list($day, $month, $year) = explode('-', $birthday) ;
 
-        $birthdayThisYear = $this->getBirthdayThisYear($date);
-        $birthdayNextYear = $this->getBirthdayNextYear($date);
+        $timeStampThisYearBirthday = mktime(0, 0,0,(int) $month,(int) $day, (int) $year) - time();
+        $timeStampNextYearBirthday = mktime(0, 0,0,(int) $month,(int) $day, (int) $year + 1) - time();
 
-        $thisYearDiff = strtotime($birthdayThisYear) - time();
-        $nextYearDiff = strtotime($birthdayNextYear) - time();
-
-        $futureBirthday = '';
-        if ($thisYearDiff < 0) {
-            $futureBirthday = $nextYearDiff;
-        } else {
-            $futureBirthday = $thisYearDiff;
+        $futureTimestamp = $timeStampThisYearBirthday;
+        if ($timeStampThisYearBirthday < 0) {
+            $futureTimestamp = $timeStampNextYearBirthday;
         }
 
-        return abs(ceil($futureBirthday / $this->secondsInDay));
-    }
-
-    private function getBirthdayThisYear(int $date): string
-    {
-        return "{$this->year}-{$this->month}-{$this->day}";
-    }
-
-    private function getBirthdayNextYear(int $date): string
-    {
-        $nextYear = (string)((int)$this->year + 1);
-        return "{$nextYear}-{$this->month}-{$this->day}";
+        return abs((int)($futureTimestamp / self::SECOND_PER_DAY));
     }
 }
