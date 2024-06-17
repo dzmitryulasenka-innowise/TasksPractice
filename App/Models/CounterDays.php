@@ -11,7 +11,7 @@ class CounterDays
     private string $month;
     private string $year;
 
-    public function main (string $birthday)
+    public function main (string $birthday): int
     {
         $date = strtotime($birthday);
         $this->day = date('d', $date);
