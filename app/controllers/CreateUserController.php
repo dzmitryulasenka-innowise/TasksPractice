@@ -6,10 +6,10 @@ namespace app\controllers;
 
 use app\interfaces\ControllerInterface;
 
-class UserController implements ControllerInterface
+class CreateUserController implements ControllerInterface
 {
     public function index(): void
     {
-        include "/home/dmitry/Documents/Projects/TasksPractice/app/views/users/new.php";
+        include "/home/dmitry/Documents/Projects/TasksPractice/app/views/users/showNew.php";
     }
 }
