@@ -10,7 +10,7 @@ services:
     build:
       context: .
     volumes:
-      - /home/dmitry/Documents/Projects/TasksPractice/public:/var/www/html
+      - ./:/var/www/html
       - /home/dmitry/Documents/Projects/TasksPractice/docker/nginx:/etc/nginx/conf.d
 
   php:
@@ -18,7 +18,7 @@ services:
     networks:
       - myProject
     volumes:
-      - /home/dmitry/Documents/Projects/TasksPractice/public:/var/www/html
+      - ./:/var/www/html
 
 
 networks:

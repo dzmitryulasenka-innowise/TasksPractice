@@ -8,7 +8,7 @@
 <body>
 
 <div>
-    <input type=button onClick="parent.location='public/users/new'" value='click here'>
+    <input type=button onClick="parent.location='users/new'" value='click here'>
 </div>
 
 </body>

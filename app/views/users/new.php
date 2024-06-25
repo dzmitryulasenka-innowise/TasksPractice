@@ -8,7 +8,7 @@
 <body>
 
 <div>
-    <form action="/public/users/create" method="post">
+    <form action="/users/create" method="post">
         <label for="email"></label>
         <input type="email" id="email" placeholder="Email" name="email">
 
