@@ -7,7 +7,12 @@
 </head>
 <body>
 
-
+<p>
+    <?php foreach ($data as $key => $value):
+        print_r("{$key}:{$value}");
+        echo "<br>";
+    endforeach; ?>
+</p>
 
 </body>
 

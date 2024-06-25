@@ -10,6 +10,17 @@ class UserController implements ControllerInterface
 {
     public function index(): void
     {
-        include "/home/dmitry/Documents/Projects/TasksPractice/app/views/users/new.php";
+        $data = [];
+        foreach ($_POST as $key => $value) {
+            $data[$key] = $value;
+        }
+
+        $this->showNewView($data);
     }
+
+    private function showNewView(array $data): void
+    {
+        include VIEWS_PATH . "/users/showNew.php";
+    }
+
 }

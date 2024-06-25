@@ -10,6 +10,7 @@ class AppController implements ControllerInterface
 {
     public function index(): void
     {
-        include "/home/dmitry/Documents/Projects/TasksPractice/app/views/start.php";
+        include VIEWS_PATH . "/start.php";
     }
+
 }

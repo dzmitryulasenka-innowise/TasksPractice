@@ -7,11 +7,9 @@
 </head>
 <body>
 
-    <div>
-        <form action="public/users/create" method="get">
-            <input type="submit" value="New User">
-        </form>
-    </div>
+<div>
+    <input type=button onClick="parent.location='public/users/new'" value='click here'>
+</div>
 
 </body>
 

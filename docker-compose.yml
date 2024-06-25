@@ -1,0 +1,26 @@
+version: '3'
+
+services:
+  nginx:
+    image: nginx:alpine
+    ports:
+      - '8080:80'
+    networks:
+      - myProject
+    build:
+      context: .
+    volumes:
+      - /home/dmitry/Documents/Projects/TasksPractice/public:/var/www/html
+      - /home/dmitry/Documents/Projects/TasksPractice/docker/nginx:/etc/nginx/conf.d
+
+  php:
+    image: php:fpm-alpine
+    networks:
+      - myProject
+    volumes:
+      - /home/dmitry/Documents/Projects/TasksPractice/public:/var/www/html
+
+
+networks:
+  myProject:
+    driver: bridge

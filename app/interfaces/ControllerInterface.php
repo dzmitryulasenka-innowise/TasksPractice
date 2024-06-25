@@ -4,5 +4,5 @@ namespace app\interfaces;
 
 interface ControllerInterface
 {
-    public function index();
+    public function index(): void;
 }

@@ -1,23 +1,24 @@
 <?php
 
+declare(strict_types=1);
+
 namespace bootstrap;
 
 use app\controllers\AppController;
 use app\controllers\UserController;
 use app\controllers\CreateUserController;
+use bootstrap\Config\Routes;
 
-class Route {
-    private $getRoutes = ['/public' => 'app\\controllers\\AppController', '/public/users/new' => 'app\\controllers\\UserController'];
-    private $postRoutes = ['/public/users/create' => 'app\\controllers\\CreateUserController'];
+class Route
+{
 
-    public function handleRequest($method, $url) {
+    public function handleRequest(string $method, string $url): void
+    {
 
-        $controllerName = match (true) {
-            $method === 'GET' => $this->getRoutes[$url],
-            $method === 'POST' => $this->postRoutes[$url],
-        };
-
+        $routes = new Routes();
+        $controllerName = $routes->getController($method, $url);
         $controller = new $controllerName();
         $controller->index();
+
     }
 }
