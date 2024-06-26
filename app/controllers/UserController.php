@@ -20,7 +20,7 @@ class UserController implements ControllerInterface
 
     private function showNewView(array $data): void
     {
-        include __DIR__ . "/../views/users/showNew.php";
+        include VIEWS_PATH . '/users/showNew.php';
     }
 
 }

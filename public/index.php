@@ -1,7 +1,9 @@
 <?php
 
 //require_once __DIR__ . '/../vendor/autoload.php';
+require_once __DIR__ . '/../bootstrap/Config/base-paths.php';
 require_once __DIR__ . '/../bootstrap/autoload.php';
+
 
 use system\App;
 

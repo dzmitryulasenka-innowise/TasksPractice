@@ -10,7 +10,9 @@ class CreateUserController implements ControllerInterface
 {
     public function index(): void
     {
-        include __DIR__ . "/../views/users/new.php";
+//        print_r(VIEWS_PATH . '/users/new.php');
+    
+        include VIEWS_PATH . '/users/new.php';
     }
 
 }
