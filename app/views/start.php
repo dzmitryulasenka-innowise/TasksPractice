@@ -2,7 +2,7 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <title> Start </title>
+    <title> Start project </title>
     <link rel="stylesheet" href="../css/main.css">
 </head>
 <body>
