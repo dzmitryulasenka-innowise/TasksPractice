@@ -4,7 +4,9 @@
   "description": "MoreLess",
   "autoload": {
     "psr-4": {
-      "App\\": "App/"
+      "app\\": "app/",
+      "system\\": "system/",
+      "bootstrap\\": "bootstrap/"
     }
   },
   "require": {
