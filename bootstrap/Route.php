@@ -14,6 +14,6 @@ class Route
         $controllerName = $routes->getController($method, $url);
         $controller = new $controllerName();
         $controller->index();
-
+adasdasdasdasdasdasdasdasd
     }
 }
