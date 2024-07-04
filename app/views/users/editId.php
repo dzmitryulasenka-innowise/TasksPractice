@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title> Show new user </title>
+    <link rel="stylesheet" href="../css/main.css">
+</head>
+<body>
+
+<div>
+
+    <label for="name"></label>
+    <input type="text" id="name" placeholder=<?php $user['name'] ?> name="name">
+
+    <label for="email"></label>
+    <input type="email" id="email" placeholder=<?php $user['email'] ?> name="email">
+
+    <label for="gender"></label>
+    <select name="gender">
+        <option value="male" <?php if ($user["gender"] === "male") echo "selected"; ?>>male</option>
+        <option value="female" <?php if ($user["gender"] === "female") echo "selected"; ?>>female</option>
+    </select>
+
+    <label for="status"></label>
+    <select name="status">
+        <option value="active" <?php if ($user["status"] == "active") echo "selected"; ?>>Active user</option>
+        <option value="inactive" <?php if ($user["status"] == "inactive") echo "selected"; ?>>Inactive user</option>
+    </select>
+
+
+</div>
+
+</body>
+
+</html>

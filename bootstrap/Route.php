@@ -11,8 +11,10 @@ class Route
     {
 
         $routes = new Routes();
+        print_r('DASDASDAS');
         $controllerName = $routes->getController($method, $url);
-        $controller = new $controllerName();
-        $controller->index();
+        print_r('DASDASDAS');
+        $controller = new $controllerName($url);
+        $controller->index($url);
     }
 }

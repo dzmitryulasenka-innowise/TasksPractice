@@ -8,15 +8,15 @@
 <body>
 
 <div>
-    <form action="/users/create" method="post">
-        <label for="email"></label>
-        <input type="email" id="email" placeholder="Email" name="email">
-
+    <form action="/users" method="post">
 
         <label for="name"></label>
         <input type="text" id="name" placeholder="Your first and last name" name="name">
 
-        <label for="name"></label>
+        <label for="email"></label>
+        <input type="email" id="email" placeholder="Email" name="email">
+
+        <label for="gender"></label>
         <select name="gender">
             <option value="male" selected>male</option>
             <option value="female">female</option>

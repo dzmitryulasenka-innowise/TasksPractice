@@ -10,4 +10,10 @@ $app = new App();
 $app->run();
 
 
-
+//
+//$pattern = '/\/users/';
+//
+//$string = '/users/4';
+//
+//$id = preg_replace($pattern, '', $string);
+//print_r($id);

@@ -1,26 +1,39 @@
-version: '3'
+version: "3.7"
 
 services:
   nginx:
-    image: nginx:alpine
-    ports:
-      - '8080:80'
-    networks:
-      - myProject
     build:
-      context: .
+      context: ./Docker/nginx
+    ports:
+      - "8084:80"
     volumes:
-      - ./:/var/www/html
-      - /home/dmitry/Documents/Projects/TasksPractice/docker/nginx:/etc/nginx/conf.d
+      - ./:/var/www/html # Отобразите на компе и куда переносим его(тоже место и в конфиге root
+    networks:
+      - backend
+
 
   php:
-    image: php:fpm-alpine
-    networks:
-      - myProject
+    build:
+      context: ./Docker/php
+    ports:
+      - "9000:9000"  #  Обычно PHP-FPM слушает порт 9000
     volumes:
-      - ./:/var/www/html
+      - ./:/var/www/html  #  Отобразите ваш проект в контейнер
+    networks:
+      - backend
 
+  db:
+    image: quincyqiu/mysql8.0
+    container_name: db
+    ports:
+      - "3307:3306"
+    environment:
+      - MYSQL_ROOT_PASSWORD=superSecretPassword
+      - MYSQL_DATABASE=myMysql
+    volumes:
+      - /home/dmitry/Documents/db:/var/lib/mysql
+    networks:
+      - backend
 
 networks:
-  myProject:
-    driver: bridge
+  backend:
