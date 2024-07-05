@@ -22,8 +22,7 @@ class DeleteUserIdController implements ControllerInterface
         $id = (int)$_POST['id'];
         User::delete($id);
 
-        $users = User::getAll();
-        include VIEWS_PATH . '/users/showAll.php';
+        header('Location: /users');
 
     }
 

@@ -16,7 +16,6 @@ class Routes
 //        if (!isset($routesArray[$method])) {
 //            throw new Exception("Method '$method' not found in routes array");
 //        }
-        print_r($url);
         // Поиск соответствия по URL с помощью регулярных выражений
         foreach ($routesArray[$method] as $pattern => $controller) {
             if (preg_match("/^{$pattern}$/", $url)) {

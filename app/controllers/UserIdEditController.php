@@ -20,11 +20,9 @@ class UserIdEditController implements ControllerInterface
     public function index(): void
     {
 
-
-        $pattern = '/\/users\//';
-        $id = (int)preg_replace($pattern, '', $this->url);
-        $pattern = '/\/edit/';
-        $id = (int)preg_replace($pattern, '', $this->url);
+        $pattern = '/\/users\/([0-9]+)\/edit/';
+        preg_match($pattern, $this->url, $matches);
+        $id = (int) $matches[1];
         $user = User::getId($id);
 
 

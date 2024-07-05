@@ -20,11 +20,10 @@ class PostEditUserIdController implements ControllerInterface
     public function index(): void
     {
 
-        $id = $_POST['id'];
-        //TODO update data
+        $id = (int)$_POST['id'];
+        User::update($id);
 
-
-        include VIEWS_PATH . '/users/showAll.php';
+        header('Location: /users');
 
     }
 

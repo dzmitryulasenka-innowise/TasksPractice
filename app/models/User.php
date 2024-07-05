@@ -16,48 +16,80 @@ class User
 
     public function getAll(): array
     {
-        $db = Database::getInstance();
-        $pdo = $db->getConnection();
 
-        //TODO обработка ошибок при запросах в базу данных
-        return $pdo->query('SELECT * FROM users')->fetchAll(PDO::FETCH_ASSOC);
+        try {
+            $db = Database::getInstance();
+            $pdo = $db->getConnection();
+
+            return $pdo->query('SELECT * FROM users')->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            return [];
+        }
+
     }
 
     public function getId(int $id): array
     {
-        $db = Database::getInstance();
-        $pdo = $db->getConnection();
 
-        $requestDatabase = $pdo->prepare('SELECT * FROM users WHERE id = ?');
-        $requestDatabase->execute([$id]);
+        try {
+            $db = Database::getInstance();
+            $pdo = $db->getConnection();
+            $requestDB = $pdo->prepare('SELECT * FROM users WHERE id = ?');
+            $requestDB->execute([$id]);
 
-        return $requestDatabase->fetch(PDO::FETCH_ASSOC);
+            return $requestDB->fetch(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            return [];
+        }
     }
 
-    public function post(): void
+    public function post(): bool
     {
-        $db = Database::getInstance();
-        $pdo = $db->getConnection();
-
         $name = $_POST['name'];
         $email = $_POST['email'];
         $gender = $_POST['gender'];
         $status = $_POST['status'];
 
-        $pdo->query("INSERT INTO users (name, email, gender, status) VALUES('$name','$email','$gender','$status')");
+        try {
+            $db = Database::getInstance();
+            $pdo = $db->getConnection();
+
+            return $pdo->query("INSERT INTO users (name, email, gender, status) VALUES('$name','$email','$gender','$status')");
+        } catch (PDOException $e) {
+            return false;
+        }
     }
 
-    public function delete(int $id)
+    public function update(int $id): bool
     {
-        $db = Database::getInstance();
-        $pdo = $db->getConnection();
+        $name = $_POST['name'];
+        $email = $_POST['email'];
+        $gender = $_POST['gender'];
+        $status = $_POST['status'];
 
-        $rqdb = $pdo->prepare("DELETE FROM users WHERE id = ?");
-        $rqdb->execute([$id]);
+        try {
+            $db = Database::getInstance();
+            $pdo = $db->getConnection();
+            $requestDB = $pdo->prepare("UPDATE users SET name = ?, email = ?, gender = ?, status = ? WHERE id = ?");
 
-        //TODO не работает $id в удалении и выборе 1
-        //TODO проверить все по мвс
+            return $requestDB->execute([$name, $email, $gender, $status, $id]);
+        } catch (PDOException $e) {
+            return false;
+        }
+
     }
 
+    public function delete(int $id): bool
+    {
+        try {
+            $db = Database::getInstance();
+            $pdo = $db->getConnection();
+            $requestDB = $pdo->prepare("DELETE FROM users WHERE id = ?");
+
+            return $requestDB->execute([$id]);
+        } catch (PDOException $e) {
+            return false;
+        }
+    }
 
 }

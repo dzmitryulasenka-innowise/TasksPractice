@@ -19,12 +19,11 @@ class PostNewUserController implements ControllerInterface
 
     public function index(): void
     {
-//        print_r($_POST['name']);
 
 
-        User::post();
-        $users = User::getAll();
-        include VIEWS_PATH . '/users/showAll.php';
+        $user = User::post();
+
+        header('Location: /users');
 
     }
 

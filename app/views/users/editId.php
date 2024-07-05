@@ -9,23 +9,30 @@
 
 <div>
 
-    <label for="name"></label>
-    <input type="text" id="name" placeholder=<?php $user['name'] ?> name="name">
+    <form action="/users/<?php echo $user['id'] ?>/edit" method="post">
 
-    <label for="email"></label>
-    <input type="email" id="email" placeholder=<?php $user['email'] ?> name="email">
+        <input type="hidden" name="id" value="<?php echo $user['id']; ?>">
 
-    <label for="gender"></label>
-    <select name="gender">
-        <option value="male" <?php if ($user["gender"] === "male") echo "selected"; ?>>male</option>
-        <option value="female" <?php if ($user["gender"] === "female") echo "selected"; ?>>female</option>
-    </select>
+        <label for="name"></label>
+        <input type="text" id="name" value=<?php echo $user['name'] ?> name="name">
 
-    <label for="status"></label>
-    <select name="status">
-        <option value="active" <?php if ($user["status"] == "active") echo "selected"; ?>>Active user</option>
-        <option value="inactive" <?php if ($user["status"] == "inactive") echo "selected"; ?>>Inactive user</option>
-    </select>
+        <label for="email"></label>
+        <input type="email" id="email" value=<?php echo $user['email'] ?> name="email">
+
+        <label for="gender"></label>
+        <select name="gender">
+            <option value="male" <?php if ($user["gender"] === "male") echo "selected"; ?>>male</option>
+            <option value="female" <?php if ($user["gender"] === "female") echo "selected"; ?>>female</option>
+        </select>
+
+        <label for="status"></label>
+        <select name="status">
+            <option value="active" <?php if ($user["status"] == "active") echo "selected"; ?>>Active user</option>
+            <option value="inactive" <?php if ($user["status"] == "inactive") echo "selected"; ?>>Inactive user</option>
+        </select>
+
+        <input type="submit" value="Show information">
+    </form>
 
 
 </div>
