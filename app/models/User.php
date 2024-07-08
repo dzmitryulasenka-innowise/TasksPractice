@@ -21,9 +21,17 @@ class User
             $db = Database::getInstance();
             $pdo = $db->getConnection();
 
-            return $pdo->query('SELECT * FROM users')->fetchAll(PDO::FETCH_ASSOC);
+            $resultRequstDB = $pdo->query('SELECT * FROM users')->fetchAll(PDO::FETCH_ASSOC);
+            return [
+                'status' => 'success',
+                'data' => $resultRequstDB
+            ];
         } catch (PDOException $e) {
-            return [];
+            return [
+                'status' => 'error',
+                'message' => $e->getMessage(),
+                'code' => $e->getCode()
+            ];
         }
 
     }
@@ -37,13 +45,21 @@ class User
             $requestDB = $pdo->prepare('SELECT * FROM users WHERE id = ?');
             $requestDB->execute([$id]);
 
-            return $requestDB->fetch(PDO::FETCH_ASSOC);
+            $resultRequestBD = $requestDB->fetch(PDO::FETCH_ASSOC);
+            return [
+                'status' => 'success',
+                'data' => $resultRequestBD
+            ];
         } catch (PDOException $e) {
-            return [];
+            return [
+                'status' => 'error',
+                'message' => $e->getMessage(),
+                'code' => $e->getCode()
+            ];
         }
     }
 
-    public function post(): bool
+    public function post(): array
     {
         $name = $_POST['name'];
         $email = $_POST['email'];
@@ -54,13 +70,20 @@ class User
             $db = Database::getInstance();
             $pdo = $db->getConnection();
 
-            return $pdo->query("INSERT INTO users (name, email, gender, status) VALUES('$name','$email','$gender','$status')");
+            $resultRequestDB = $pdo->query("INSERT INTO users (name, email, gender, status) VALUES('$name','$email','$gender','$status')");
+            return [
+                'status' => 'success',
+            ];
         } catch (PDOException $e) {
-            return false;
+            return [
+                'status' => 'error',
+                'message' => $e->getMessage(),
+                'code' => $e->getCode()
+            ];
         }
     }
 
-    public function update(int $id): bool
+    public function update(int $id): array
     {
         $name = $_POST['name'];
         $email = $_POST['email'];
@@ -72,23 +95,37 @@ class User
             $pdo = $db->getConnection();
             $requestDB = $pdo->prepare("UPDATE users SET name = ?, email = ?, gender = ?, status = ? WHERE id = ?");
 
-            return $requestDB->execute([$name, $email, $gender, $status, $id]);
+            $resultRequestDB = $requestDB->execute([$name, $email, $gender, $status, $id]);
+            return [
+                'status' => 'success',
+            ];
         } catch (PDOException $e) {
-            return false;
+            return [
+                'status' => 'error',
+                'message' => $e->getMessage(),
+                'code' => $e->getCode()
+            ];
         }
 
     }
 
-    public function delete(int $id): bool
+    public function delete(int $id): array
     {
         try {
             $db = Database::getInstance();
             $pdo = $db->getConnection();
             $requestDB = $pdo->prepare("DELETE FROM users WHERE id = ?");
 
-            return $requestDB->execute([$id]);
+            $resultRequestDB = $requestDB->execute([$id]);
+            return [
+                'status' => 'success',
+            ];
         } catch (PDOException $e) {
-            return false;
+            return [
+                'status' => 'error',
+                'message' => $e->getMessage(),
+                'code' => $e->getCode()
+            ];
         }
     }
 

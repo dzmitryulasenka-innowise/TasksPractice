@@ -19,15 +19,21 @@ class UserIdController implements ControllerInterface
 
     public function index(): void
     {
-
+        //Getting $id from get request like <a href="/users/<?= $user['id'] a>
         $pattern = '/\/users\//';
         $id = (int)preg_replace($pattern, '', $this->url);
-        $user = User::getId($id);
 
+        $answerBD = User::getId($id);
 
+        if ($answerBD['status'] !== 'success') {
+            print_r("Error message - {$answerBD['message']}");
+            print_r("Error code - {$answerBD['code']}");
+            http_response_code($answerBD['code']);
+        } else {
+            $user = $answerBD['data'];
+            include VIEWS_PATH . '/users/showId.php';
+        }
 
-
-        $user !== false ? include VIEWS_PATH . '/users/showId.php' : print_r("Error: Data acquisition error");
     }
 
 }

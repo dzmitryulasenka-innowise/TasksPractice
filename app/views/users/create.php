@@ -10,26 +10,48 @@
 <div>
     <form action="/users" method="post">
 
+
         <label for="name"></label>
-        <input type="text" id="name" placeholder="Your first and last name" name="name">
+        <input type="text" id="name" placeholder="Your first and last name" name="name"
+               value= <?php echo isset($user['name']) ? $user['name'] : "" ?>>
 
         <label for="email"></label>
-        <input type="email" id="email" placeholder="Email" name="email">
+        <input type="email" id="email" placeholder="Email" name="email"
+               value= <?php echo isset($user['email']) ? $user['email'] : "" ?>>
 
         <label for="gender"></label>
         <select name="gender">
-            <option value="male" selected>male</option>
-            <option value="female">female</option>
+            <option value="male" <?php if ($user["gender"] === "male") echo "selected"; ?>>male</option>
+            <option value="female" <?php if ($user["gender"] === "female") echo "selected"; ?>>female</option>
+            <option value="male" <?php if ($user["gender"] !== "female" && $user["gender"] !== "male") echo "selected"; ?>>
+                female
+            </option>
         </select>
 
         <label for="status"></label>
         <select name="status">
-            <option value="active">Active user</option>
-            <option value="inactive" selected>Inactive user</option>
+            <option value="active" <?php if ($user["status"] === "active") echo "selected"; ?>>Active user</option>
+            <option value="inactive" <?php if ($user["status"] === "inactive") echo "selected"; ?>>Inactive user
+            </option>
+            <option value="active" <?php if ($user["status"] !== "inactive" && $user["status"] !== "active") echo "selected"; ?>>
+                Inactive user
+            </option>
         </select>
 
         <input type="submit" value="Show information">
     </form>
+
+    <div>
+        <p>
+            <?php if ($errors) { ?>
+                <?php foreach ($errors as $key => $error) :
+                    print_r("Error in {$key}");
+                endforeach; ?>
+            <?php } ?>
+
+        </p>
+    </div>
+
 </div>
 
 </body>

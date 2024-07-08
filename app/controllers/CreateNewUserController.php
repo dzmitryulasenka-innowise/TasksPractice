@@ -19,6 +19,7 @@ class CreateNewUserController implements ControllerInterface
 
     public function index(): void
     {
+
         include VIEWS_PATH . '/users/create.php';
     }
 

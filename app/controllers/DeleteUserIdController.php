@@ -20,9 +20,17 @@ class DeleteUserIdController implements ControllerInterface
     public function index(): void
     {
         $id = (int)$_POST['id'];
-        User::delete($id);
+        $answerDB = User::delete($id);
 
-        header('Location: /users');
+        if ($answerDB['status'] !== 'success') {
+            print_r("Error message - {$answerDB['message']}");
+            print_r("Error code - {$answerDB['code']}");
+            http_response_code($answerDB['code']);
+        } else {
+            http_response_code(204);
+            header('Location: /users');
+        }
+
 
     }
 

@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace bootstrap;
 
 
+use Exception;
+
 class Routes
 {
 
@@ -12,10 +14,6 @@ class Routes
     {
         $routesArray = require_once 'config/routeArray.php';
 
-
-//        if (!isset($routesArray[$method])) {
-//            throw new Exception("Method '$method' not found in routes array");
-//        }
         // Поиск соответствия по URL с помощью регулярных выражений
         foreach ($routesArray[$method] as $pattern => $controller) {
             if (preg_match("/^{$pattern}$/", $url)) {
@@ -23,9 +21,7 @@ class Routes
             }
         }
 
-        return 'check edit pattern';
-        // Если соответствие не найдено
-//        throw new Exception("No matching route found for '$method' and URL '$url'");
+        throw new Exception("No matching route found for '$method' and URL '$url'");
     }
 
 }

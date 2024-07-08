@@ -19,14 +19,24 @@ class UserIdEditController implements ControllerInterface
 
     public function index(): void
     {
-
+        //Getting $id from get request like 'onclick'
         $pattern = '/\/users\/([0-9]+)\/edit/';
         preg_match($pattern, $this->url, $matches);
-        $id = (int) $matches[1];
-        $user = User::getId($id);
+        $id = (int)$matches[1];
 
 
-        include VIEWS_PATH . '/users/editId.php';
+        $answerDB = User::getId($id);
+
+        if ($answerDB['status'] !== 'success') {
+            print_r("Error message - {$answerDB['message']}");
+            print_r("Error code - {$answerDB['code']}");
+            http_response_code($answerDB['code']);
+        } else {
+            $user = $answerDB['data'];
+            include VIEWS_PATH . '/users/editId.php';
+        }
+
+
     }
 
 }

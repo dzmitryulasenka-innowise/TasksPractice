@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace bootstrap;
 
+use Exception;
+
 class Route
 {
 
@@ -11,8 +13,14 @@ class Route
     {
 
         $routes = new Routes();
-        $controllerName = $routes->getController($method, $url);
-        $controller = new $controllerName($url);
-        $controller->index($url);
+        try {
+            $controllerName = $routes->getController($method, $url);
+            $controller = new $controllerName($url);
+            $controller->index($url);
+        } catch (Exception $e) {
+            print_r($e->getMessage());
+        }
+
+
     }
 }

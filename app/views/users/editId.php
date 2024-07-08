@@ -9,15 +9,16 @@
 
 <div>
 
+
     <form action="/users/<?php echo $user['id'] ?>/edit" method="post">
 
         <input type="hidden" name="id" value="<?php echo $user['id']; ?>">
 
         <label for="name"></label>
-        <input type="text" id="name" value=<?php echo $user['name'] ?> name="name">
+        <input type="text" id="name" name="name" value= <?php echo isset($user['name']) ? $user['name'] : "" ?>>
 
         <label for="email"></label>
-        <input type="email" id="email" value=<?php echo $user['email'] ?> name="email">
+        <input type="email" id="email" name="email" value= <?php echo isset($user['email']) ? $user['email'] : "" ?>>
 
         <label for="gender"></label>
         <select name="gender">
@@ -27,13 +28,25 @@
 
         <label for="status"></label>
         <select name="status">
-            <option value="active" <?php if ($user["status"] == "active") echo "selected"; ?>>Active user</option>
-            <option value="inactive" <?php if ($user["status"] == "inactive") echo "selected"; ?>>Inactive user</option>
+            <option value="active" <?php if ($user["status"] === "active") echo "selected"; ?>>Active user</option>
+            <option value="inactive" <?php if ($user["status"] === "inactive") echo "selected"; ?>>Inactive user
+            </option>
         </select>
 
-        <input type="submit" value="Show information">
+        <input type="submit" value="Save information">
     </form>
 
+
+    <div>
+        <p>
+            <?php if ($errors) { ?>
+                <?php foreach ($errors as $key => $error) :
+                    print_r("Error in {$key}");
+                endforeach; ?>
+            <?php } ?>
+
+        </p>
+    </div>
 
 </div>
 

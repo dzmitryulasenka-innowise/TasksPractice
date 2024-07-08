@@ -20,7 +20,16 @@ class AllUsersController implements ControllerInterface
     public function index(): void
     {
         //TODO модель и там логика с данными из базы и везде так вместо трейта
-        $users = User::getAll();
+        $answer = User::getAll();
+
+        if ($answer['status'] !== 'success') {
+            print_r("Error message - {$answer['message']}");
+            print_r("Error code - {$answer['code']}");
+            http_response_code($answer['code']);
+            $users = [];
+        } else {
+            $users = $answer['data'];
+        }
 
         include VIEWS_PATH . '/users/showAll.php';
     }
