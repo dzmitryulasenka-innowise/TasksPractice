@@ -8,3 +8,4 @@ use system\App;
 
 $app = new App();
 $app->run();
+
