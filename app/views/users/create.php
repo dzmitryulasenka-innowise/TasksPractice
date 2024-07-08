@@ -22,19 +22,13 @@
         <label for="gender"></label>
         <select name="gender">
             <option value="male" <?php if ($user["gender"] === "male") echo "selected"; ?>>male</option>
-            <option value="female" <?php if ($user["gender"] === "female") echo "selected"; ?>>female</option>
-            <option value="male" <?php if ($user["gender"] !== "female" && $user["gender"] !== "male") echo "selected"; ?>>
-                female
-            </option>
+            <option value="female" <?php if ($user["gender"] !== "male") echo "selected"; ?>>female</option>
         </select>
 
         <label for="status"></label>
         <select name="status">
             <option value="active" <?php if ($user["status"] === "active") echo "selected"; ?>>Active user</option>
-            <option value="inactive" <?php if ($user["status"] === "inactive") echo "selected"; ?>>Inactive user
-            </option>
-            <option value="active" <?php if ($user["status"] !== "inactive" && $user["status"] !== "active") echo "selected"; ?>>
-                Inactive user
+            <option value="inactive" <?php if ($user["status"] !== "active") echo "selected"; ?>>Inactive user
             </option>
         </select>
 

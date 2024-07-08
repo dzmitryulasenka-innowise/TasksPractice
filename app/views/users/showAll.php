@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title> Show new user </title>
     <link rel="stylesheet" href="../css/main.css">
-    <script src="../../../public/script.js"></script>
+
 </head>
 <body>
 
@@ -21,7 +21,7 @@
                 </td>
 
                 <td>
-                    <form action="/users/remove/<?= $user['id'] ?>" method="post">
+                    <form action="/users/remove/<?= $user['id'] ?>" method="post" onSubmit="return confirm('Are you sure you want delete data')">
                         <input type="hidden" name="id" value="<?= $user['id'] ?>">
                         <input type="submit" value="Remove">
                     </form>
@@ -31,9 +31,12 @@
     </table>
 </div>
 <br>
+
+//кнопки чтото отправлять всегда, а ссыли дял перенаправления
 <div>
-    <input type=button onClick="location.href='users/new'" value='Create new user'>
+    <a href="users/new" class = 'button'> create new user </a>
 </div>
+
 
 </body>
 

@@ -10,6 +10,7 @@
 <p>
     <?php print_r("{$user['id']}. {$user['name']} {$user['email']} {$user['gender']} {$user['status']} ") ?>
 </p>
+
 <div>
     <input type=button onClick="location.href='/'" value='Back'>
 </div>
