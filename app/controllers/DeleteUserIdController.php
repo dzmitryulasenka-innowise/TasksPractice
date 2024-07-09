@@ -5,8 +5,9 @@ declare(strict_types=1);
 namespace app\controllers;
 
 use app\interfaces\ControllerInterface;
-use app\models\User;
+use app\models\UserDB;
 use app\ab\AbController;
+use app\models\User;
 
 class DeleteUserIdController implements ControllerInterface
 {
@@ -20,7 +21,7 @@ class DeleteUserIdController implements ControllerInterface
     public function index(): void
     {
         $id = (int)$_POST['id'];
-        $answerDB = User::delete($id);
+        $answerDB = UserDB::delete($id);
 
         if ($answerDB['status'] !== 'success') {
             print_r("Error message - {$answerDB['message']}");

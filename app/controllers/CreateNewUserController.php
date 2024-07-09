@@ -5,8 +5,10 @@ declare(strict_types=1);
 namespace app\controllers;
 
 use app\interfaces\ControllerInterface;
-use app\models\User;
+use app\models\UserDB;
 use app\ab\AbController;
+use app\bootstrap\config\listsOfFieldsForChoose;
+use app\models\User;
 
 class CreateNewUserController implements ControllerInterface
 {
@@ -19,7 +21,8 @@ class CreateNewUserController implements ControllerInterface
 
     public function index(): void
     {
-
+        $listsOfFieldsForChoose = require_once __DIR__ . '/../../bootstrap/config/listsOfFieldsForChoose.php';
+        $user = new User();
         include VIEWS_PATH . '/users/create.php';
     }
 

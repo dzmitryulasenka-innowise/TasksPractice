@@ -5,8 +5,9 @@ declare(strict_types=1);
 namespace app\controllers;
 
 use app\interfaces\ControllerInterface;
-use app\models\User;
+use app\models\UserDB;
 use app\ab\AbController;
+use app\models\User;
 
 class UserIdController implements ControllerInterface
 {
@@ -23,15 +24,23 @@ class UserIdController implements ControllerInterface
         $pattern = '/\/users\//';
         $id = (int)preg_replace($pattern, '', $this->url);
 
-        $answerBD = User::getId($id);
+        $answerBD = UserDB::getId($id);
 
-        if ($answerBD['status'] !== 'success') {
+        if ($answerBD['status'] === 'success') {
+            $data = $answerBD['data'];
+
+            if (!empty($data)) {
+                $user = new User($data['name'], $data['email'], $data['gender'], $data['status'], $id);
+            } else {
+                $message = 'This data is not exist';
+                http_response_code(404);
+            }
+
+            include VIEWS_PATH . '/users/showId.php';
+        } else {
             print_r("Error message - {$answerBD['message']}");
             print_r("Error code - {$answerBD['code']}");
             http_response_code($answerBD['code']);
-        } else {
-            $user = $answerBD['data'];
-            include VIEWS_PATH . '/users/showId.php';
         }
 
     }

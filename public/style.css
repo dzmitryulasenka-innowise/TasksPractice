@@ -14,3 +14,21 @@
     display: table;
     width: 100%;
 }
+
+
+.button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #4CAF50; /* Зеленый цвет по умолчанию */
+    color: white;
+    border: none;
+    border-radius: 5px; /* Скругленные углы */
+    text-align: center;
+    text-decoration: none; /* Убираем подчеркивание */
+    font-size: 16px;
+    cursor: pointer; /* Курсор-указатель */
+}
+
+.button:hover {
+    background-color: #3e8e41; /* Темнее при наведении */
+}

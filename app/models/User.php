@@ -2,10 +2,6 @@
 
 namespace app\models;
 
-use app\models\Database;
-use PDO;
-use PDOException;
-
 class User
 {
     private int $id;
@@ -14,119 +10,92 @@ class User
     private string $gender;
     private string $status;
 
-    public function getAll(): array
-    {
-
-        try {
-            $db = Database::getInstance();
-            $pdo = $db->getConnection();
-
-            $resultRequstDB = $pdo->query('SELECT * FROM users')->fetchAll(PDO::FETCH_ASSOC);
-            return [
-                'status' => 'success',
-                'data' => $resultRequstDB
-            ];
-        } catch (PDOException $e) {
-            return [
-                'status' => 'error',
-                'message' => $e->getMessage(),
-                'code' => $e->getCode()
-            ];
-        }
-
+    public function __construct(string $name = '',string $email = '',string $gender = '',string $status = '', int $id = 0 ) {
+        $this->name = $name;
+        $this->email = $email;
+        $this->gender = $gender;
+        $this->status = $status;
+        $this->id = $id;
     }
 
-    public function getId(int $id): array
+    /**
+     * @return int
+     */
+    public function getId(): int
     {
-
-        try {
-            $db = Database::getInstance();
-            $pdo = $db->getConnection();
-            $requestDB = $pdo->prepare('SELECT * FROM users WHERE id = ?');
-            $requestDB->execute([$id]);
-
-            $resultRequestBD = $requestDB->fetch(PDO::FETCH_ASSOC);
-            return [
-                'status' => 'success',
-                'data' => $resultRequestBD
-            ];
-        } catch (PDOException $e) {
-            return [
-                'status' => 'error',
-                'message' => $e->getMessage(),
-                'code' => $e->getCode()
-            ];
-        }
+        return $this->id;
     }
 
-    public function post(): array
+    /**
+     * @param int $id
+     */
+    public function setId(int $id): void
     {
-        $name = $_POST['name'];
-        $email = $_POST['email'];
-        $gender = $_POST['gender'];
-        $status = $_POST['status'];
-
-        try {
-            $db = Database::getInstance();
-            $pdo = $db->getConnection();
-
-            $resultRequestDB = $pdo->query("INSERT INTO users (name, email, gender, status) VALUES('$name','$email','$gender','$status')");
-            return [
-                'status' => 'success',
-            ];
-        } catch (PDOException $e) {
-            return [
-                'status' => 'error',
-                'message' => $e->getMessage(),
-                'code' => $e->getCode()
-            ];
-        }
+        $this->id = $id;
     }
 
-    public function update(int $id): array
+    /**
+     * @return int
+     */
+    public function getName(): string
     {
-        $name = $_POST['name'];
-        $email = $_POST['email'];
-        $gender = $_POST['gender'];
-        $status = $_POST['status'];
-
-        try {
-            $db = Database::getInstance();
-            $pdo = $db->getConnection();
-            $requestDB = $pdo->prepare("UPDATE users SET name = ?, email = ?, gender = ?, status = ? WHERE id = ?");
-
-            $resultRequestDB = $requestDB->execute([$name, $email, $gender, $status, $id]);
-            return [
-                'status' => 'success',
-            ];
-        } catch (PDOException $e) {
-            return [
-                'status' => 'error',
-                'message' => $e->getMessage(),
-                'code' => $e->getCode()
-            ];
-        }
-
+        return $this->name;
     }
 
-    public function delete(int $id): array
+    /**
+     * @param int $name
+     */
+    public function setName(int $name): void
     {
-        try {
-            $db = Database::getInstance();
-            $pdo = $db->getConnection();
-            $requestDB = $pdo->prepare("DELETE FROM users WHERE id = ?");
-
-            $resultRequestDB = $requestDB->execute([$id]);
-            return [
-                'status' => 'success',
-            ];
-        } catch (PDOException $e) {
-            return [
-                'status' => 'error',
-                'message' => $e->getMessage(),
-                'code' => $e->getCode()
-            ];
-        }
+        $this->name = $name;
     }
 
+    /**
+     * @return int
+     */
+    public function getEmail(): string
+    {
+        return $this->email;
+    }
+
+    /**
+     * @param int $email
+     */
+    public function setEmail(int $email): void
+    {
+        $this->email = $email;
+    }
+
+
+    /**
+     * @return string
+     */
+    public function getGender(): string
+    {
+        return $this->gender;
+    }
+
+    /**
+     * @param string $gender
+     */
+    public function setGender(string $gender): void
+    {
+        $this->gender = $gender;
+    }
+
+    /**
+     * @return string
+     */
+    public function getStatus(): string
+    {
+        return $this->status;
+    }
+
+    /**
+     * @param string $status
+     */
+    public function setStatus(string $status): void
+    {
+        $this->status = $status;
+    }
 }

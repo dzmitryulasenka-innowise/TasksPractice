@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title> New user create </title>
-    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../../../public/style.css">
 </head>
 <body>
 
@@ -11,36 +11,47 @@
     <form action="/users" method="post">
 
 
-        <label for="name"></label>
+        <label for="name">Name</label>
         <input type="text" id="name" placeholder="Your first and last name" name="name"
-               value= <?php echo isset($user['name']) ? $user['name'] : "" ?>>
+               value= <?php echo $user->getName() ?>>
 
-        <label for="email"></label>
+        <br>
+
+        <label for="email">Email</label>
         <input type="email" id="email" placeholder="Email" name="email"
-               value= <?php echo isset($user['email']) ? $user['email'] : "" ?>>
+               value= <?php echo $user->getEmail() ?>>
 
-        <label for="gender"></label>
+        <br>
+
+
+        <label for="gender">Gender</label>
         <select name="gender">
-            <option value="male" <?php if ($user["gender"] === "male") echo "selected"; ?>>male</option>
-            <option value="female" <?php if ($user["gender"] !== "male") echo "selected"; ?>>female</option>
+            <?php foreach ($listsOfFieldsForChoose['gender'] as $gender): ?>
+                <option value=<?php echo $gender ?> <?php if ($user->getGender() === $gender) echo "selected"; ?>><?php echo $gender ?></option>
+            <?php endforeach; ?>
         </select>
 
-        <label for="status"></label>
+        <br>
+
+        <label for="status">Status</label>
         <select name="status">
-            <option value="active" <?php if ($user["status"] === "active") echo "selected"; ?>>Active user</option>
-            <option value="inactive" <?php if ($user["status"] !== "active") echo "selected"; ?>>Inactive user
-            </option>
+            <?php foreach ($listsOfFieldsForChoose['status'] as $status): ?>
+                <option value=<?php echo $status ?> <?php if ($user->getStatus() === $status) echo "selected"; ?>><?php echo $status ?></option>
+            <?php endforeach; ?>
         </select>
 
-        <input type="submit" value="Show information">
+        <br>
+
+        <input type="submit" value="Save user">
     </form>
 
     <div>
         <p>
-            <?php if ($errors) { ?>
-                <?php foreach ($errors as $key => $error) :
-                    print_r("Error in {$key}");
-                endforeach; ?>
+            <?php if (!empty($resultValidation)) { ?>
+                <?php foreach ($resultValidation['errors'] as $key => $error) :
+                    print_r($error);?>
+                    <br>
+                <?php endforeach; ?>
             <?php } ?>
 
         </p>

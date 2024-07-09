@@ -7,17 +7,31 @@ class Validation
 
     public function validate(array $data): array
     {
+
+        $status = 'success';
+        $errors = [];
+        $errorData = [];
+
         $rules = require_once 'config/validateRules.php';
-        $result = [];
 
         foreach ($data as $key => $value) {
-            $check = $this->validateStringByRegex($value, $rules[$key]);
-            if ($check !== true) {
-                $result[$key] = $check;
+            //if rules for this key exist
+            if (!empty($rules[$key])) {
+
+                $check = $this->validateStringByRegex($value, $rules[$key]);
+                if ($check !== true) {
+                    $status = 'fail';
+                    $errors[] = "Error with {$key}";
+                    $errorData[$key] = $value;
+                }
             }
         }
 
-        return $result;
+        return [
+            'status' => $status,
+            'errors' => $errors,
+            'data' => $errorData
+        ];
     }
 
     private function validateStringByRegex($string, $regex): bool

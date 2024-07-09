@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace app\controllers;
 
 use app\interfaces\ControllerInterface;
+use app\models\UserDB;
 use app\models\User;
 use app\ab\AbController;
 
@@ -19,20 +20,22 @@ class AllUsersController implements ControllerInterface
 
     public function index(): void
     {
-        //TODO модель и там логика с данными из базы и везде так вместо трейта
-        $answer = User::getAll();
 
-        if ($answer['status'] !== 'success') {
-            print_r("Error message - {$answer['message']}");
-            print_r("Error code - {$answer['code']}");
-            http_response_code($answer['code']);
-            $users = [];
+        $answerDB = UserDB::getAll();
+
+        $users = [];
+
+        if ($answerDB['status'] === 'success') {
+            foreach ($answerDB['data'] as $userDB) {
+                $users[] = new User($userDB['name'], $userDB['email'], $userDB['gender'], $userDB['status'], (int)$userDB['id']);
+            }
         } else {
-            $users = $answer['data'];
+            print_r("Error message - {$answerDB['message']}");
+            print_r("Error code - {$answerDB['code']}");
+            http_response_code($answerDB['code']);
         }
 
         include VIEWS_PATH . '/users/showAll.php';
+
     }
-
-
 }

@@ -3,16 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <title> Show new user </title>
-    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../../../public/style.css">
 </head>
 <body>
 
 <p>
-    <?php print_r("{$user['id']}. {$user['name']} {$user['email']} {$user['gender']} {$user['status']} ") ?>
+    <?php echo !empty($message) ? $message : ''?>
+</p>
+
+
+
+<p>
+    <?php !empty($user) ? print_r("{$user->getId()} {$user->getName()} {$user->getEmail()} {$user->getGender()} {$user->getStatus()} ") : '' ?>
 </p>
 
 <div>
-    <input type=button onClick="location.href='/'" value='Back'>
+    <a href="/">Back</a>
 </div>
 
 

@@ -3,37 +3,44 @@
 <head>
     <meta charset="UTF-8">
     <title> Show new user </title>
-    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../../../public/style.css">
 </head>
 <body>
 
 <div>
 
 
-    <form action="/users/<?php echo $user['id'] ?>/edit" method="post">
+    <form action="/users/<?php echo $user->getId() ?>/edit" method="post">
 
-        <input type="hidden" name="id" value="<?php echo $user['id']; ?>">
+        <input type="hidden" name="id" value="<?php echo $user->getId() ; ?>">
 
-        <label for="name">enter you name</label>
-        <input type="text" id="name" name="name" value= <?php echo isset($user['name']) ? $user['name'] : "" ?>>
+        <label for="name">Name</label>
+        <input type="text" id="name" name="name" value= <?php echo !empty($user->getName()) ? ($user->getName()) : "" ?>>
 
-        <label for="email"></label>
-        <input type="email" id="email" name="email" value= <?php echo isset($user['email']) ? $user['email'] : "" ?>>
+        <br>
 
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" value= <?php echo !empty($user->getEmail()) ? ($user->getEmail()) : "" ?>>
 
-        //все списки чего либо должны храниться отдельно - 1 источник
-        <label for="gender"></label>
+        <br>
+
+        <label for="gender">Gender</label>
         <select name="gender">
-            <option value="male" <?php if ($user["gender"] === "male") echo "selected"; ?>>male</option>
-            <option value="female" <?php if ($user["gender"] !== "male") echo "selected"; ?>>female</option>
+            <?php foreach ($listsOfFieldsForChoose['gender'] as $gender): ?>
+                <option value=<?php echo $gender ?> <?php if ($user->getGender() === $gender) echo "selected"; ?>><?php echo $gender ?></option>
+            <?php endforeach; ?>
         </select>
 
-        <label for="status"></label>
+        <br>
+
+        <label for="status">Status</label>
         <select name="status">
-            <option value="active" <?php if ($user["status"] === "active") echo "selected"; ?>>Active user</option>
-            <option value="inactive" <?php if ($user["status"] !== "active") echo "selected"; ?>>Inactive user
-            </option>
+            <?php foreach ($listsOfFieldsForChoose['status'] as $status): ?>
+                <option value=<?php echo $status ?> <?php if ($user->getStatus() === $status) echo "selected"; ?>><?php echo $status ?></option>
+            <?php endforeach; ?>
         </select>
+
+        <br>
 
         <input type="submit" value="Save information">
     </form>
@@ -45,6 +52,18 @@
                 <?php foreach ($errors as $key => $error) :
                     print_r("Error in {$key}");
                 endforeach; ?>
+            <?php } ?>
+
+        </p>
+    </div>
+
+    <div>
+        <p>
+            <?php if (!empty($resultValidation)) { ?>
+                <?php foreach ($resultValidation['errors'] as $key => $error) :
+                    print_r($error);?>
+                    <br>
+                <?php endforeach; ?>
             <?php } ?>
 
         </p>
