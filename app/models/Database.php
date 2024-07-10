@@ -13,15 +13,17 @@ class Database
 
     private function __construct()
     {
-        $dsn = 'mysql:host=db;dbname=myMysql';
-        $username = 'root';
-        $password = 'superSecretPassword';
+
+        $dataLoginDB = require __DIR__ . '/../../bootstrap/config/mysqlData.php';
+        $dsn = 'mysql:host=' . $dataLoginDB["host"] . ';dbname=' . $dataLoginDB["dbname"];
+        $username = $dataLoginDB['user'];
+        $password = $dataLoginDB['password'];
 
         try {
             $this->pdo = new PDO($dsn, $username, $password);
             $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         } catch (PDOException $e) {
-//            print($e->getMessage());
+            print($e->getMessage());
         }
     }
 

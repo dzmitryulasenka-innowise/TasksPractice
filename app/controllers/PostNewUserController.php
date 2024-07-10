@@ -6,9 +6,9 @@ namespace app\controllers;
 
 use app\interfaces\ControllerInterface;
 use app\models\UserDB;
-use app\ab\AbController;
 use bootstrap\Validation;
 use app\models\User;
+use app\models\enums\VerificationStatus;
 
 class PostNewUserController implements ControllerInterface
 {
@@ -21,17 +21,17 @@ class PostNewUserController implements ControllerInterface
 
     public function index(): void
     {
+
         $user = new User($_POST['name'], $_POST['email'], $_POST['gender'], $_POST['status']);
         $data = ['name' => $user->getName(), 'email' => $user->getEmail(), 'gender' => $user->getGender(), 'status' => $user->getStatus()];
         $validation = new Validation();
         $resultValidation = $validation->validate($data);
 
-
-        if ($resultValidation['status'] === 'success') {
+        if ($resultValidation['status'] === VerificationStatus::Success) {
             $answerDB = UserDB::post($user);
 
-            if ($answerDB['status'] !== 'success') {
-                print_r("Error message - {$answerDB['message']}");
+            if ($answerDB['status'] !== VerificationStatus::Success) {
+                print_r("Error message - {$answerDB['message']} ");
                 print_r("Error code - {$answerDB['code']}");
                 http_response_code($answerDB['code']);
             } else {
@@ -40,6 +40,7 @@ class PostNewUserController implements ControllerInterface
             }
 
         } else {
+            $listsOfFieldsForChoose = require_once __DIR__ . '/../../bootstrap/config/listsOfFieldsForChoose.php';
             include VIEWS_PATH . '/users/create.php';
         }
 

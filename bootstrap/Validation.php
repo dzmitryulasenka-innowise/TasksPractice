@@ -2,25 +2,28 @@
 
 namespace bootstrap;
 
+use app\models\enums\VerificationStatus;
+
 class Validation
 {
 
     public function validate(array $data): array
     {
 
-        $status = 'success';
+        $status = VerificationStatus::Success;
         $errors = [];
         $errorData = [];
 
-        $rules = require_once 'config/validateRules.php';
+        $rules = require 'config/validateRules.php';
 
         foreach ($data as $key => $value) {
+
             //if rules for this key exist
             if (!empty($rules[$key])) {
 
                 $check = $this->validateStringByRegex($value, $rules[$key]);
                 if ($check !== true) {
-                    $status = 'fail';
+                    $status = VerificationStatus::Failure;
                     $errors[] = "Error with {$key}";
                     $errorData[$key] = $value;
                 }

@@ -6,8 +6,8 @@ namespace app\controllers;
 
 use app\interfaces\ControllerInterface;
 use app\models\UserDB;
-use app\ab\AbController;
 use app\models\User;
+use app\models\enums\VerificationStatus;
 
 class UserIdController implements ControllerInterface
 {
@@ -26,7 +26,7 @@ class UserIdController implements ControllerInterface
 
         $answerBD = UserDB::getId($id);
 
-        if ($answerBD['status'] === 'success') {
+        if ($answerBD['status'] === VerificationStatus::Success) {
             $data = $answerBD['data'];
 
             if (!empty($data)) {

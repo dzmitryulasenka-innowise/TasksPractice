@@ -6,7 +6,6 @@ namespace app\controllers;
 
 use app\interfaces\ControllerInterface;
 use app\models\UserDB;
-use app\ab\AbController;
 use app\bootstrap\config\listsOfFieldsForChoose;
 use app\models\User;
 
@@ -23,6 +22,7 @@ class CreateNewUserController implements ControllerInterface
     {
         $listsOfFieldsForChoose = require_once __DIR__ . '/../../bootstrap/config/listsOfFieldsForChoose.php';
         $user = new User();
+
         include VIEWS_PATH . '/users/create.php';
     }
 

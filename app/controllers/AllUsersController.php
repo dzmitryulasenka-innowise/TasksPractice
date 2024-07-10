@@ -7,7 +7,7 @@ namespace app\controllers;
 use app\interfaces\ControllerInterface;
 use app\models\UserDB;
 use app\models\User;
-use app\ab\AbController;
+use app\models\enums\VerificationStatus;
 
 class AllUsersController implements ControllerInterface
 {
@@ -25,7 +25,7 @@ class AllUsersController implements ControllerInterface
 
         $users = [];
 
-        if ($answerDB['status'] === 'success') {
+        if ($answerDB['status'] === VerificationStatus::Success) {
             foreach ($answerDB['data'] as $userDB) {
                 $users[] = new User($userDB['name'], $userDB['email'], $userDB['gender'], $userDB['status'], (int)$userDB['id']);
             }

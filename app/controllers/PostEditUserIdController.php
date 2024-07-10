@@ -6,9 +6,9 @@ namespace app\controllers;
 
 use app\interfaces\ControllerInterface;
 use app\models\UserDB;
-use app\ab\AbController;
 use bootstrap\Validation;
 use app\models\User;
+use app\models\enums\VerificationStatus;
 
 
 class PostEditUserIdController implements ControllerInterface
@@ -28,9 +28,9 @@ class PostEditUserIdController implements ControllerInterface
         $validation = new Validation();
         $resultValidation = $validation->validate($data);
 
-        if ($resultValidation['status'] === 'success') {
+        if ($resultValidation['status'] === VerificationStatus::Success) {
             $answerDB = UserDB::update($user);
-            if ($answerDB['status'] === 'success') {
+            if ($answerDB['status'] === VerificationStatus::Success) {
                 header('Location: /users');
             } else {
                 print_r("Error message - {$answerDB['message']}");
@@ -38,6 +38,7 @@ class PostEditUserIdController implements ControllerInterface
                 http_response_code($answerDB['code']);
             }
         } else {
+            $listsOfFieldsForChoose = require_once __DIR__ . '/../../bootstrap/config/listsOfFieldsForChoose.php';
             include VIEWS_PATH . '/users/editId.php';
         }
 

@@ -1,6 +1,6 @@
 <?php
 
-require_once __DIR__ . '/../bootstrap/config/base-paths.php';
+require __DIR__ . '/../bootstrap/config/base-paths.php';
 require_once __DIR__ . '/../bootstrap/autoload.php';
 
 

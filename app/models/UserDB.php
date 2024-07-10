@@ -6,11 +6,12 @@ use app\models\Database;
 use PDO;
 use PDOException;
 use app\models\User;
+use app\models\enums\VerificationStatus;
 
 class UserDB
 {
 
-    public function getAll(): array
+    public static function getAll(): array
     {
 
         try {
@@ -19,20 +20,20 @@ class UserDB
 
             $resultRequstDB = $pdo->query('SELECT * FROM users')->fetchAll(PDO::FETCH_ASSOC);
             return [
-                'status' => 'success',
+                'status' => VerificationStatus::Success,
                 'data' => $resultRequstDB
             ];
         } catch (PDOException $e) {
             return [
-                'status' => 'error',
+                'status' => VerificationStatus::Failure,
                 'message' => $e->getMessage(),
-                'code' => $e->getCode()
+                'code' => (int)$e->getCode()
             ];
         }
 
     }
 
-    public function getId(int $id): array
+    public static function getId(int $id): array
     {
 
         try {
@@ -43,19 +44,19 @@ class UserDB
 
             $resultRequestBD = $requestDB->fetch(PDO::FETCH_ASSOC);
             return [
-                'status' => 'success',
+                'status' => VerificationStatus::Success,
                 'data' => $resultRequestBD
             ];
         } catch (PDOException $e) {
             return [
-                'status' => 'error',
+                'status' => VerificationStatus::Failure,
                 'message' => $e->getMessage(),
-                'code' => $e->getCode()
+                'code' => (int)$e->getCode()
             ];
         }
     }
 
-    public function post(User $user): array
+    public static function post(User $user): array
     {
         $name = $user->getName();
         $email = $user->getEmail();
@@ -68,18 +69,18 @@ class UserDB
 
             $pdo->query("INSERT INTO users (name, email, gender, status) VALUES('$name','$email','$gender','$status')");
             return [
-                'status' => 'success',
+                'status' => VerificationStatus::Success,
             ];
         } catch (PDOException $e) {
             return [
-                'status' => 'error',
+                'status' => VerificationStatus::Failure,
                 'message' => $e->getMessage(),
-                'code' => $e->getCode()
+                'code' => (int)$e->getCode()
             ];
         }
     }
 
-    public function update($user): array
+    public static function update($user): array
     {
         $name = $user->getName();
         $email = $user->getEmail();
@@ -94,19 +95,19 @@ class UserDB
 
             $requestDB->execute([$name, $email, $gender, $status, $id]);
             return [
-                'status' => 'success',
+                'status' => VerificationStatus::Success,
             ];
         } catch (PDOException $e) {
             return [
-                'status' => 'error',
+                'status' => VerificationStatus::Failure,
                 'message' => $e->getMessage(),
-                'code' => $e->getCode()
+                'code' => (int)$e->getCode()
             ];
         }
 
     }
 
-    public function delete(int $id): array
+    public static function delete(int $id): array
     {
         try {
             $db = Database::getInstance();
@@ -115,13 +116,13 @@ class UserDB
 
             $resultRequestDB = $requestDB->execute([$id]);
             return [
-                'status' => 'success',
+                'status' => VerificationStatus::Success,
             ];
         } catch (PDOException $e) {
             return [
-                'status' => 'error',
+                'status' => VerificationStatus::Failure,
                 'message' => $e->getMessage(),
-                'code' => $e->getCode()
+                'code' => (int)$e->getCode()
             ];
         }
     }

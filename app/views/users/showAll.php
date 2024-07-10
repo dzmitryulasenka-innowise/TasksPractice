@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title> Show new user </title>
-    <link rel="stylesheet" href="../../../public/style.css">
+    <link rel="stylesheet" href="/style.css">
 
 </head>
 <body>
@@ -13,7 +13,7 @@
         <?php foreach ($users as $user): ?>
             <tr>
                 <td>
-                    <a href="/users/<?= $user->getName() ?>"> <?php print_r("{$user->getId()}. {$user->getName()} {$user->getEmail()} {$user->getGender()} {$user->getStatus()} ") ?> </a>
+                    <a href="/users/<?= $user->getId() ?>"> <?php print_r("{$user->getId()}. {$user->getName()} {$user->getEmail()} {$user->getGender()} {$user->getStatus()} ") ?> </a>
                 </td>
 
                 <td>

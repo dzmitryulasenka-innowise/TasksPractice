@@ -12,7 +12,7 @@ class Routes
 
     public function getController(string $method, string $url): string
     {
-        $routesArray = require_once 'config/routeArray.php';
+        $routesArray = require 'config/routeArray.php';
 
         // Поиск соответствия по URL с помощью регулярных выражений
         foreach ($routesArray[$method] as $pattern => $controller) {

@@ -6,8 +6,8 @@ namespace app\controllers;
 
 use app\interfaces\ControllerInterface;
 use app\models\UserDB;
-use app\ab\AbController;
 use app\models\User;
+use app\models\enums\VerificationStatus;
 
 class UserIdEditController implements ControllerInterface
 {
@@ -28,18 +28,17 @@ class UserIdEditController implements ControllerInterface
 
         $answerDB = UserDB::getId($id);
 
-        if ($answerDB['status'] === 'success') {
+        if ($answerDB['status'] === VerificationStatus::Success) {
             $data = $answerDB['data'];
             if (!empty($data)) {
                 $user = new User($data['name'], $data['email'], $data['gender'], $data['status'], $id);
                 $listsOfFieldsForChoose = require_once __DIR__ . '/../../bootstrap/config/listsOfFieldsForChoose.php';
 
-                include VIEWS_PATH . '/users/editId.php';
             } else {
                 $message = 'This data is not exist';
                 http_response_code(404);
             }
-
+            include VIEWS_PATH . '/users/showId.php';
 
 
         } else {

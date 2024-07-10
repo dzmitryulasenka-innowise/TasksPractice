@@ -45,18 +45,6 @@
         <input type="submit" value="Save information">
     </form>
 
-
-    <div>
-        <p>
-            <?php if ($errors) { ?>
-                <?php foreach ($errors as $key => $error) :
-                    print_r("Error in {$key}");
-                endforeach; ?>
-            <?php } ?>
-
-        </p>
-    </div>
-
     <div>
         <p>
             <?php if (!empty($resultValidation)) { ?>
@@ -68,6 +56,7 @@
 
         </p>
     </div>
+
 
 </div>
 
