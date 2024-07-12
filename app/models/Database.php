@@ -15,9 +15,9 @@ class Database
     {
 
         $dataLoginDB = require __DIR__ . '/../../bootstrap/config/mysqlData.php';
-        $dsn = 'mysql:host=' . $dataLoginDB["host"] . ';dbname=' . $dataLoginDB["dbname"];
-        $username = $dataLoginDB['user'];
-        $password = $dataLoginDB['password'];
+        $dsn = 'mysql:host=' . $_ENV['DB_HOST']. ';dbname=' . $_ENV['DB_DATABASE'];
+        $username = $_ENV['DB_USERNAME'];
+        $password = $_ENV['DB_PASSWORD'];
 
         try {
             $this->pdo = new PDO($dsn, $username, $password);

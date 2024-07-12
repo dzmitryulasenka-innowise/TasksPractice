@@ -1,4 +1,4 @@
 composer install
-docker run
+docker-compose
 docker-compose build
 docker compose up -d

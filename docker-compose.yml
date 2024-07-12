@@ -10,6 +10,8 @@ services:
       - ./:/var/www/html # Отобразите на компе и куда переносим его(тоже место и в конфиге root
     networks:
       - backend
+    env_file:
+      - .env
 
 
   php:
@@ -21,19 +23,30 @@ services:
       - ./:/var/www/html  #  Отобразите ваш проект в контейнер
     networks:
       - backend
+    env_file:
+      - .env
 
   db:
-    image: quincyqiu/mysql8.0
+    image: mysql:8.0
     container_name: db
     ports:
       - "3307:3306"
     environment:
-      - MYSQL_ROOT_PASSWORD=superSecretPassword
-      - MYSQL_DATABASE=myMysql
+      - MYSQL_ROOT_PASSWORD=${DB_PASSWORD}"
+      - MYSQL_DATABASE=${DB_DATABASE}"
     volumes:
       - db-data-test:/var/lib/mysql
+      - ./init.sql :/docker-entrypoint-initdb.d/init.sql
     networks:
       - backend
+    env_file:
+      - .env
+
 
 networks:
   backend:
+
+
+volumes:
+  db-data-test: #создание одноименной папки для сохранения бд на локальном компе
+    driver: local
