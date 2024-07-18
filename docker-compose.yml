@@ -29,18 +29,18 @@ services:
   db:
     image: mysql:8.0
     container_name: db
+    env_file:
+      - .env
     ports:
       - "3307:3306"
     environment:
-      - MYSQL_ROOT_PASSWORD=${DB_PASSWORD}"
-      - MYSQL_DATABASE=${DB_DATABASE}"
+      - MYSQL_ROOT_PASSWORD=${DB_PASSWORD}
+      - MYSQL_DATABASE=${DB_DATABASE}
     volumes:
-      - db-data-test:/var/lib/mysql
-      - ./init.sql :/docker-entrypoint-initdb.d/init.sql
+      - ./databaseTest:/var/lib/mysql
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
     networks:
       - backend
-    env_file:
-      - .env
 
 
 networks:

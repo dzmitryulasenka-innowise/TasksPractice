@@ -5,10 +5,10 @@ declare(strict_types=1);
 namespace app\controllers;
 
 use app\interfaces\ControllerInterface;
-use app\models\UserDB;
-use bootstrap\Validation;
-use app\models\User;
 use app\models\enums\VerificationStatus;
+use app\models\User;
+use app\models\UserDB;
+use Validation;
 
 class PostNewUserController implements ControllerInterface
 {

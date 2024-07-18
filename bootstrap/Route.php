@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace bootstrap;
 
 use Exception;
+use Routes;
 
 class Route
 {

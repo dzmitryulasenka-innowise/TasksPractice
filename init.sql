@@ -6,4 +6,4 @@ CREATE TABLE IF NOT EXISTS users (
     status VARCHAR(255)
 );
 
-INSERT INTO users SET (name, email, gender, status) VALUE ('dima', 'qwe@gmail.com', 'male', 'active');
+INSERT INTO users (name, email, gender, status) VALUE ('dima', 'qwe@gmail.com', 'male', 'active');

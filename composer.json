@@ -6,7 +6,7 @@
     "psr-4": {
       "app\\": "app/",
       "system\\": "system/",
-      "bootstrap\\": "bootstrap/"
+      "bootstrap\\": "../../testEnv/bootstrap/"
     }
   },
   "require": {

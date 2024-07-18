@@ -6,10 +6,12 @@ use mysql_xdevapi\DatabaseObject;
 use PDO;
 use PDOException;
 
-class Database
+final class Database
 {
-    private static $instance = null;
+    //self тут это тип данных Database
+    private static ?self $instance = null;
     private $pdo;
+
 
     private function __construct()
     {
@@ -29,8 +31,8 @@ class Database
 
     public static function getInstance(): Database
     {
-        if (self::$instance == null) {
-            self::$instance = new Database();
+        if (self::$instance === null) {
+            self::$instance = new self();
         }
         return self::$instance;
     }
@@ -38,5 +40,15 @@ class Database
     public function getConnection(): PDO
     {
         return $this->pdo;
+    }
+
+    public function __wakeup(): void
+    {
+        // TODO: Implement __wakeup() method.
+    }
+
+    public function __clone(): void
+    {
+        // TODO: Implement __clone() method.
     }
 }
