@@ -1,5 +1,6 @@
 <?php
 
+namespace bootstrap;
 
 use app\models\enums\VerificationStatus;
 

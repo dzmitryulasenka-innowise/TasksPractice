@@ -10,13 +10,12 @@ final class Database
 {
     //self тут это тип данных Database
     private static ?self $instance = null;
-    private $pdo;
+    private PDO $pdo;
 
 
     private function __construct()
     {
 
-        $dataLoginDB = require __DIR__ . '/../../bootstrap/config/mysqlData.php';
         $dsn = 'mysql:host=' . $_ENV['DB_HOST']. ';dbname=' . $_ENV['DB_DATABASE'];
         $username = $_ENV['DB_USERNAME'];
         $password = $_ENV['DB_PASSWORD'];

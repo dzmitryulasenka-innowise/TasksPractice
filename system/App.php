@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace system;
 
-use Route;
+use bootstrap\Route;
 
 class App
 {
