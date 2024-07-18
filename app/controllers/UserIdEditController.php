@@ -38,7 +38,7 @@ class UserIdEditController implements ControllerInterface
                 $message = 'This data is not exist';
                 http_response_code(404);
             }
-            include VIEWS_PATH . '/users/showId.php';
+            include VIEWS_PATH . '/users/editId.php';
 
 
         } else {

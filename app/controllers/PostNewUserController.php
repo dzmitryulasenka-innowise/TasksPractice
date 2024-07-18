@@ -8,7 +8,7 @@ use app\interfaces\ControllerInterface;
 use app\models\enums\VerificationStatus;
 use app\models\User;
 use app\models\UserDB;
-use Validation;
+use bootstrap\Validation;
 
 class PostNewUserController implements ControllerInterface
 {
